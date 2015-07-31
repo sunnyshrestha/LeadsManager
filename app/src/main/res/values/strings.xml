@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">Leads Manager</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_lead">Add a New Lead</string>
+
+
+    <string name="action_search">Search</string>
+    <string name="add_new_lead">Add a new lead</string>
+    <string name="view_database">View database</string>
+    <string name="search_hint">Type to search database</string>
+
+    <!--organisation-->
+    <string name="company">Company details</string>
+    <string name="company_name">Company name</string>
+    <string name="address">Office address</string>
+    <string name="phone">Office no.</string>
+    <string name="website">Website</string>
+
+    <!--person-->
+    <string name="contact_person">Contact person</string>
+    <string name="person_name">Person\'s name</string>
+    <string name="designation">Designation</string>
+    <string name="mobile_no">Mobile no.</string>
+    <string name="email">email id</string>
+
+    <!--discussion-->
+    <string name="discussion_notes">Notes</string>
+    <string name="product">Discussion and Remarks</string>
+    <string name="follow_up">Follow up date (dd-mm-yyyy)</string>
+
+    <string name="meeting_date">Meeting date (dd-mm-yyyy)   </string>
+    <string name="title_activity_add_lead_detail">Add Lead Details</string>
+    <string name="met_date">Meeting date</string>
+    <string name="follow_up_on">Follow up on</string>
+
+    <string name="save">Add to database</string>
+    <string name="title_activity_display_details">Lead Details</string>
+
+    <!--Toast-->
+    <string name="savesuccess">Successfully added to database</string>
+    <string name="not_found">Number not found</string>
+
+    <string name="leadssummary">Leads summary</string>
+    <string name="title_activity_show_summary">Your Leads</string>
+
+    <string name="no_lead">Seems like you have not entered any lead details at the moment. Press the + button below to add lead details.</string>
+
+    <string name="discard">Discard changes?</string>
+    <string name="discard_message">Do you want to discard changes?</string>
+
+    <string name="no_number">Action not available for empty number field</string>
+
+    <string name="select_action">Select action</string>
+    <string name="no_package">No apps installed to handle this action</string>
+    <string name="noemail">Action not available for empty email id field</string>
+
+
+    <string name="datemismatch">Date mismatch</string>
+    <string name="datemismatchmessage">Follow up date needs to be after the meeting date.</string>
+
+    <string name="datenoset">Date not set</string>
+
+    <string name="edit">Edit lead</string>
+    <string name="delete">Delete lead details</string>
+    <string name="deleteConfirmation">Are you sure you want to delete the lead information?</string>
+    <string name="check">Check Icon</string>
+    <string name="drawable">Circular drawable</string>
+
+    <string name="ratethelead">How do you rate this lead?</string>
+    <string name="ratingtext">Your Rating:</string>
+    <string name="title_activity_edit_lead">Edit Lead Details</string>
+
+    <string name="changessaved">Changes Saved</string>
+    <string name="saved">Added to database</string>
+
+    <string name="add_event_title">Add event to calendar</string>
+    <string name="event_name">Event Title</string>
+    <string name="meetingdate">Meeting Date</string>
+    <string name="meeting_time">Meeting Time</string>
+    <string name="reminder">Reminder</string>
+
+    <string name="reminderday">Date to remind on</string>
+    <string name="remindertime">Time to remind on</string>
+
+    <string name="choosedate">Pick Date</string>
+    <string name="choosetime">Pick Time</string>
+    <string name="addtocalendar">Add follow-up date to calendar</string>
+    <string name="addfollowupfirst">Date fields cannot be empty</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="dateformaterror">Invalid date</string>
+    <string name="add">Add to calendar</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_add_event">Add event to calendar</string>
+    <string name="reminderdatemismatchmessage">Reminder date should be before the follow up date</string>
+    <string name="notset">Name not set</string>
+    <string name="title_activity_search">Search Result</string>
+    <string name="title_activity_display_summary_contacts">Leads Summary</string>
+    <string name="title_activity_edit">"Edit Lead "</string>
+    <string name="title_activity_display_lead_details">Lead Details</string>
+
+
+</resources>
