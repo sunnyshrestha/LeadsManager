@@ -6,13 +6,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class summaryView extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;
@@ -29,6 +32,7 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_summary_view);
 
         dbHelper = new DatabaseHelper(this);
+        viewDecider();
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setupToolbar();
@@ -39,12 +43,8 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
         recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
         setRecyclerView();
 
-        recyclerView.setVisibility(View.GONE);
-
         nolead = (TextView)findViewById(R.id.noLead);
-        nolead.setVisibility(View.GONE);
 
-        viewDecider();
         fab.setOnClickListener(this);
     }
 
@@ -52,7 +52,17 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(dbHelper.getAllLeads());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(myRecyclerViewAdapter);
+        recyclerView.setItemAnimator( new DefaultItemAnimator());
+        myRecyclerViewAdapter.SetOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getApplicationContext(),DisplayLeadDetails.class);
+                intent.putExtra("key",position);
+                Toast.makeText(getApplicationContext(),"Start new Activity",Toast.LENGTH_SHORT).show();
+                Log.v("Should start activity","Did?");
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupToolbar() {
@@ -78,8 +88,14 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
     }
 
     public void viewDecider(){                          //decides whether to show the database summary or No Leads text
-        if(dbHelper.getLeadsCount()>0)
+        if(dbHelper.getLeadsCount()>0){
             recyclerView.setVisibility(View.VISIBLE);
+            nolead.setVisibility(View.GONE);
+        }else{
+            nolead.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
+
     }
 
     @Override

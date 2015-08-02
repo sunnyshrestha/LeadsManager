@@ -1,7 +1,6 @@
 package dev.suncha.leadsmanager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import java.util.ArrayList;
 
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
     DatabaseHelper databaseHelper;
     private ArrayList<Lead> leadinfo;
-
+    OnItemClickListener mItemClickListener;
 
 
     public MyRecyclerViewAdapter(ArrayList<Lead> leadinfo) {
@@ -27,7 +25,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_row, parent, false);
         return new MyViewHolder(v);
     }
@@ -53,11 +51,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView personemail;
         TextView personphone;
         RelativeLayout relativeLayout;
-        private final Context context;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            context=itemView.getContext();
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.mainLayout);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             checkIcon = (ImageView) itemView.findViewById(R.id.checkIcon);
@@ -65,12 +61,23 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             personname = (TextView) itemView.findViewById(R.id.personname);
             personemail = (TextView) itemView.findViewById(R.id.personemail);
             personphone = (TextView) itemView.findViewById(R.id.personphone);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context,DisplayLeadDetails.class);
-            context.startActivity(intent);
+            if (mItemClickListener != null)
+                //noinspection deprecation
+                mItemClickListener.onItemClick(view, (int) getItemId());
+
         }
+    }
+    public interface OnItemClickListener {
+        public void onItemClick(View view, int position);
+    }
+
+    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener){
+        this.mItemClickListener = mItemClickListener;
     }
 }
