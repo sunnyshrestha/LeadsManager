@@ -52,6 +52,7 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(dbHelper.getAllLeads());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(summaryView.this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(summaryView.this,null));
         recyclerView.setItemAnimator( new DefaultItemAnimator());
 
         myRecyclerViewAdapter.SetOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
