@@ -31,8 +31,9 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_view);
 
-        dbHelper = new DatabaseHelper(this);
-        viewDecider();
+        dbHelper = new DatabaseHelper(summaryView.this);
+        Toast.makeText(getApplicationContext(),String.valueOf(dbHelper.getLeadsCount()),Toast.LENGTH_SHORT).show();
+        nolead = (TextView)findViewById(R.id.noLead);
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setupToolbar();
@@ -40,29 +41,31 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
         fab = (FloatingActionButton)findViewById(R.id.buttonFloat);
         coordinatorLayout=(CoordinatorLayout)findViewById(R.id.coordinatorlayout);
         snackbarDecider();
+
         recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
         setRecyclerView();
-
-        nolead = (TextView)findViewById(R.id.noLead);
-
         fab.setOnClickListener(this);
+        viewDecider();
     }
 
     public void setRecyclerView(){
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(dbHelper.getAllLeads());
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(summaryView.this));
         recyclerView.setItemAnimator( new DefaultItemAnimator());
+
         myRecyclerViewAdapter.SetOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getApplicationContext(),DisplayLeadDetails.class);
                 intent.putExtra("key",position);
-                Toast.makeText(getApplicationContext(),"Start new Activity",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),String.valueOf((int)myRecyclerViewAdapter.getItemId(position)),Toast.LENGTH_SHORT).show();
+                Toast.makeText(summaryView.this,"Position is "+String.valueOf(position),Toast.LENGTH_SHORT).show();
                 Log.v("Should start activity","Did?");
                 startActivity(intent);
             }
         });
+        recyclerView.setAdapter(myRecyclerViewAdapter);
     }
 
     private void setupToolbar() {
@@ -127,4 +130,14 @@ public class summaryView extends AppCompatActivity implements View.OnClickListen
                 break;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //viewDecider();
+        setRecyclerView();
+    }
+
+
+
 }

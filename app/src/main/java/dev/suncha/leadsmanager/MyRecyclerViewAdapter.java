@@ -1,6 +1,5 @@
 package dev.suncha.leadsmanager;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
  * Created by Sunny on 7/30/2015.
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
-    DatabaseHelper databaseHelper;
     private ArrayList<Lead> leadinfo;
     OnItemClickListener mItemClickListener;
 
@@ -36,6 +34,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.personname.setText(leadinfo.get(position).getPerson_name());
         holder.personemail.setText(leadinfo.get(position).getPerson_email());
         holder.personphone.setText(leadinfo.get(position).getPerson_mobile());
+//        holder.idHolder.setText(leadinfo.get(position).getId());
     }
 
     @Override
@@ -50,6 +49,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView personname;
         TextView personemail;
         TextView personphone;
+//        TextView idHolder;
         RelativeLayout relativeLayout;
 
         public MyViewHolder(View itemView) {
@@ -61,6 +61,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             personname = (TextView) itemView.findViewById(R.id.personname);
             personemail = (TextView) itemView.findViewById(R.id.personemail);
             personphone = (TextView) itemView.findViewById(R.id.personphone);
+//            idHolder=(TextView)itemView.findViewById(R.id.idHolder);
+
 
             itemView.setOnClickListener(this);
         }
@@ -69,10 +71,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         public void onClick(View view) {
             if (mItemClickListener != null)
                 //noinspection deprecation
-                mItemClickListener.onItemClick(view, (int) getItemId());
-
+                mItemClickListener.onItemClick(view, getLayoutPosition());
         }
     }
+
+
+
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
     }

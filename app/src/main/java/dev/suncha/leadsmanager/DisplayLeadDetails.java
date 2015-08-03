@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +34,7 @@ public class DisplayLeadDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_lead_details);
-        mHelper = new DatabaseHelper(this);
+        mHelper = new DatabaseHelper(DisplayLeadDetails.this);
 
         organisation_name = (TextView) findViewById(R.id.out_organisation_name);
         office_address = (TextView) findViewById(R.id.out_organisation_address);
@@ -53,20 +54,21 @@ public class DisplayLeadDetails extends AppCompatActivity {
 
         Intent intent = getIntent();
         int entryId = intent.getIntExtra("key", -1);
+        Log.v("Received entryId",String.valueOf(entryId));
 
         setupToolbar();
 
-        organisation_name.setText(mHelper.getLead(entryId).getCompany_name());
-        office_address.setText(mHelper.getLead(entryId).getCompany_address());
-        office_phone.setText(mHelper.getLead(entryId).getCompany_phone());
-        website.setText(mHelper.getLead(entryId).getCompany_web());
-        person_name.setText(mHelper.getLead(entryId).getPerson_name());
-        designation.setText(mHelper.getLead(entryId).getPerson_designation());
-        mobile.setText(mHelper.getLead(entryId).getPerson_mobile());
-        email.setText(mHelper.getLead(entryId).getPerson_email());
-        product_discussed.setText(mHelper.getLead(entryId).getDiscussion_and_remarks());
-        meeting_date.setText(mHelper.getLead(entryId).getMeeting_date());
-        followup_date.setText(mHelper.getLead(entryId).getFollowup_date());
+        organisation_name.setText(mHelper.getLead(entryId+1).getCompany_name());
+        office_address.setText(mHelper.getLead(entryId+1).getCompany_address());
+        office_phone.setText(mHelper.getLead(entryId+1).getCompany_phone());
+        website.setText(mHelper.getLead(entryId+1).getCompany_web());
+        person_name.setText(mHelper.getLead(entryId+1).getPerson_name());
+        designation.setText(mHelper.getLead(entryId+1).getPerson_designation());
+        mobile.setText(mHelper.getLead(entryId+1).getPerson_mobile());
+        email.setText(mHelper.getLead(entryId+1).getPerson_email());
+        product_discussed.setText(mHelper.getLead(entryId+1).getDiscussion_and_remarks());
+        meeting_date.setText(mHelper.getLead(entryId+1).getMeeting_date());
+        followup_date.setText(mHelper.getLead(entryId+1).getFollowup_date());
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +156,7 @@ public class DisplayLeadDetails extends AppCompatActivity {
                 return true;
             case R.id.edit:
                 Intent editIntent = new Intent(getApplicationContext(), EditActivity.class);
-                editIntent.putExtra("key", getIntent().getIntExtra("key", -1));
+                editIntent.putExtra("key", getIntent().getIntExtra("key", -1)+1);
                 startActivity(editIntent);
                 return true;
             default:

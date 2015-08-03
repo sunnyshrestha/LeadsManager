@@ -90,6 +90,12 @@
             android:focusableInTouchMode="false"
             android:textColor="@color/secondary_text"
             android:textIsSelectable="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idHolder"
+            android:visibility="gone"/>
     </LinearLayout>
 
 
